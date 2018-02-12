@@ -1,0 +1,45 @@
+1)
+
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
+destFile <- "C:\\Users\\ittt\\Desktop\\Week4Quiz.csv"
+download.file(fileUrl, destFile, mode = 'wb')
+data <- read.csv(destFile)
+data_table <- data.table(data)
+data_names <- names(data_table)
+data_names <- strsplit(data_names, "wgtp")
+data_names[[123]]
+
+2)
+
+data <- fread(destFile, skip = 4, nrows = 190, select = c(1, 2, 4, 5), col.names= c("CountryCode", "Rank", "Economy", "Total"))
+gdp <- as.numeric(gsub(",", "", data$Total))
+mean(gdp)
+
+3)
+
+isUnited <- grepl("^United", data$Economy)
+summary(isUnited)
+
+4)
+
+downlad.file(fileUrl2, destFile2, mode = 'wb')
+download.file(fileUrl2, destFile2, mode = 'wb')
+data1 <- fread(destFile1, skip = 4, select = c(1, 2, 4, 5), col.names = c("CountryCode", "Ranking", "Economy", "Total"))
+data2 <- fread(destFile2)
+mergedData <- merge(data1, data2, by = "CountryCode")
+data_temp <- table(grepl("june", tolower(mergedData$'Special Notes')), grepl("fiscal year end", tolower(mergedData$'Special Notes')))
+data_temp[2, 2]
+
+
+5)
+
+install.packages("quantmod")
+amzn = getSymbols("AMZN",auto.assign=FALSE)
+sampleTimes = index(amzn)
+length(grep("^2012",sampleTimes))
+
+library(lubridate)
+sampleTimes[grep("^2012",sampleTimes)]
+sum(weekdays(as.Date(sampleTimes[grep("^2012",sampleTimes)]))=="Monday")
+
+
